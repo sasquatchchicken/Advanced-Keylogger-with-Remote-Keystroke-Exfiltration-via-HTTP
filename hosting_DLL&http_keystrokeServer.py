@@ -31,6 +31,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
 if __name__ == '__main__':
-    server = HTTPServer(('192.168.1.15', 8080), SimpleHTTPRequestHandler)
+    server = HTTPServer(('<attacker_server_IP>', 8080), SimpleHTTPRequestHandler)
     print("Server listening on port 8080...")
     server.serve_forever()
